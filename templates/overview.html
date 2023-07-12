@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Overview</title>
+    <style>
+        html {
+            font-family: Arial, serif;
+            background-color: #E7E7E7;
+        }
+        .box {
+            background-color: white;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <h1>Overview</h1>
+    <h2>Favorites</h2>
+    <p style="color: #1F30CB; margin-left: 470px" onclick="alert('todo: implement edit option')">Edit</p>
+    <div class="box" style="height: 140px; width: 500px">
+        <div style="display: inline-block; vertical-align: top">
+            <img src="../static/activity.png" style="height: 30px; margin-left:20px; margin-top: 20px" alt="">
+        </div>
+        <div style="display: inline-block; margin: 10px; color: #FF7A00">
+            <p>Activity</p>
+        </div>
+        <div class="arrow" style="display: inline-block; vertical-align: top;">
+            <img src="../static/arrow.png" style="margin-left: 350px; height: 30px; margin-top: 10px" alt="">
+        </div>
+        <div style="display: block">
+            Hallo Welt!
+        </div>
+    </div>
+
+    <div class="box" style="height: 140px; width: 500px" onclick="window.location='/trends/2';">
+        <div style="display: inline-block; vertical-align: top">
+            <img src="../static/pain.png" style="height: 30px; margin-left:20px; margin-top: 20px" alt="">
+        </div>
+        <div style="display: inline-block; margin: 10px; color: #8000FF">
+            <p>Back pain</p>
+        </div>
+        <div class="arrow" style="display: inline-block; vertical-align: top;">
+            <img src="../static/arrow.png" style="margin-left: 320px; margin-top: 15px; height: 30px" alt="">
+        </div>
+        <div style="display: inline-block">
+            <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
+                <span style="color: #88F5BA;">Less</span> pain
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #88F5BA; margin-left: 260px; color: #26E82D; stroke: #007805; border-radius: 5px">
+                <img src="../static/greendot.png" style="height: 14px; margin-right: 10px;margin-left: 5px">8.2 / 10
+            </div>
+            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                than last week
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 281px; color: #26E82D; stroke: #007805; border-radius: 5px">
+                <span style="visibility: hidden">8.2 / 10-----</span>
+            </div>
+            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                <span style="visibility: hidden">than last week</span>
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 281px; color: #26E82D; stroke: #007805; border-radius: 5px">
+                <span style="visibility: hidden">8.2 / 10-----</span>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="box" style="height: 140px; width: 500px">
+        <div style="display: inline-block; vertical-align: top">
+            <img src="../static/stress.png" style="height: 30px; margin-left:20px; margin-top: 20px" alt="">
+        </div>
+        <div style="display: inline-block; margin: 10px; color: #FF3D00">
+            <p>Stress</p>
+        </div>
+        <div class="arrow" style="display: inline-block; vertical-align: top;">
+            <img src="../static/arrow.png" style="margin-left: 340px; height: 30px; margin-top: 10px" alt="">
+        </div>
+        <div style="display: inline-block">
+            <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
+                <span style="color: #F2DD20;">Medium</span> stress level
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 120px; color: #26E82D; stroke: #007805; border-radius: 5px">
+                <span style="visibility: hidden">5.1 / 10-----</span>
+            </div>
+            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                last week
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #F2DD20; margin-left: 306px; color: #FFC700; stroke: #007805; border-radius: 5px">
+                <img src="../static/yellowdot.png" style="height: 14px; margin-right: 10px;margin-left: 5px"><span>5.1 / 10</span>
+            </div>
+            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                <span style="visibility: hidden">last week</span>
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 306px; color: #26E82D; stroke: #007805; border-radius: 5px">
+                <span style="visibility: hidden">5.1 / 10-----</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="box" style="height: 140px; width: 500px">
+        <div style="display: inline-block; vertical-align: top">
+            <img src="../static/sleep.png" style="height: 30px; margin-left:20px; margin-top: 20px" alt="">
+        </div>
+        <div style="display: inline-block; margin: 10px; color: #00C2FF">
+            <p>Quality of Sleep</p>
+        </div>
+        <div class="arrow" style="display: inline-block; vertical-align: top;">
+            <img src="../static/arrow.png" style="margin-left: 275px; height: 30px; margin-top: 10px" alt="">
+        </div>
+        <div style="display: inline-block">
+            <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
+                <span style="color: #EC6161;">Poor</span> quality of sleep
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 120px; color: #26E82D; stroke: #007805; border-radius: 5px">
+                <span style="visibility: hidden">3.2 / 10-----</span>
+            </div>
+            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                last week
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 315px; color: #FFC700; stroke: #007805; border-radius: 5px">
+                <span style="visibility: hidden">3.2 / 10-----</span>
+            </div>
+            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                <span style="visibility: hidden">last week</span>
+            </div>
+            <div style="display: inline; height: 30px; width: 80px; background-color: #EC6161; margin-left: 315px; color: #DA1B1B; stroke: #007805; border-radius: 5px">
+                <img src="../static/reddot.png" style="height: 14px; margin-right: 10px;margin-left: 5px"><span>3.2 / 10</span>
+            </div>
+        </div>
+    </div>
+    <script>
+        {#let chord = d3.layout.chord()#}
+    </script>
+</body>
+</html>

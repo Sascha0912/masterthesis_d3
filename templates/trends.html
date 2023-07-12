@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trends</title>
+    <style>
+        html {
+            font-family: Arial, serif;
+            background-color: #FFFFFF;
+        }
+        .bar {
+            fill: #F57600;
+        }
+        line {
+            stroke: black;
+        }
+        #other_container {
+            background-color: #E7E7E7;
+            width: 700px;
+            height: 1000px;
+        }
+        .trendbox {
+            background-color: #FFFFFF;
+            width: 500px;
+            height: 200px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            margin-left: 20px
+        }
+    </style>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
+<body>
+    <h1>Back pain development</h1>
+    <h2>monthly view</h2>
+
+    <svg id="trendchart" width="600" height="500"></svg>
+
+    <div id="other_container">
+        <h2 style="margin: 20px">Other trends</h2>
+
+        <div class="trendbox">
+            <div style="display: inline-block; vertical-align: top">
+                <img src="../static/pain.png" style="height: 30px; margin-left: 20px; margin-top: 20px" alt="">
+            </div>
+            <div style="display: inline-block; margin: 10px; color: #8000FF">
+                <p>Back pain</p>
+            </div>
+
+            <hr style="margin-left: 10px; margin-right: 10px">
+            <svg id="other_backpain" width="500" height="100"></svg>
+        </div>
+
+        <div class="trendbox">
+            <div style="display: inline-block; vertical-align: top">
+                <img src="../static/activity.png" style="height: 30px; margin-left: 20px; margin-top: 20px" alt="">
+            </div>
+            <div style="display: inline-block; margin: 10px; color: #FF7A00">
+                <p>Activity</p>
+            </div>
+
+            <hr style="margin-left: 10px; margin-right: 10px">
+        </div>
+
+        <div class="trendbox">
+            <div style="display: inline-block; vertical-align: top">
+                <img src="../static/stress.png" style="height: 30px; margin-left: 20px; margin-top: 20px" alt="">
+            </div>
+            <div style="display: inline-block; margin: 10px; color: #FF3D00">
+                <p>Stress</p>
+            </div>
+
+            <hr style="margin-left: 10px; margin-right: 10px">
+        </div>
+
+        <div class="trendbox">
+            <div style="display: inline-block; vertical-align: top">
+                <img src="../static/sleep.png" style="height: 30px; margin-left: 20px; margin-top: 20px" alt="">
+            </div>
+            <div style="display: inline-block; margin: 10px; color: #00C2FF">
+                <p>Quality of sleep</p>
+            </div>
+
+            <hr style="margin-left: 10px; margin-right: 10px">
+        </div>
+
+    </div>
+    <script>
+        let paindata = JSON.parse('{{ data | tojson | safe }}')
+        const sum = Object.values(paindata["pain"]).reduce((acc, current) => acc + current.value, 0);
+        const average = sum / Object.values(paindata["pain"]).length;
+
+        // ********** TRENDCHART **************
+
+        let svg = d3.select("#trendchart"),
+            margin = 200,
+            width = svg.attr("width") - margin,
+            height = svg.attr("height") - margin
+
+        svg.append("text")
+           .attr("transform", "translate(100,0)")
+           .attr("x", 50)
+           .attr("y", 50)
+           .attr("font-size", "24px")
+           .text("pain value (0 - 10)")
+
+        let xScale = d3.scaleBand().range([0, width]).padding(0.4),
+            yScale = d3.scaleLinear().range([height, 0]);
+
+        let g = svg.append("g")
+                   .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
+            xScale.domain(paindata["pain"].map(function(d) { return d.id; }));
+            yScale.domain([0, 10])
+
+            g.append("g")
+             .attr("transform", "translate(0," + height + ")")
+             .call(d3.axisBottom(xScale))
+             .append("text")
+             .attr("y", height - 250)
+             .attr("x", width - 100)
+             .attr("text-anchor", "end")
+             .attr("stroke", "black")
+             .text("Month");
+
+            g.append("g")
+             .call(d3.axisLeft(yScale).tickFormat(function(d){
+                      return d;
+             })
+             .ticks(10))
+             .append("text")
+             .attr("transform", "rotate(-90)")
+             .attr("y", 6)
+             .attr("dy", "-5.1em")
+             .attr("text-anchor", "end")
+             .attr("stroke", "black")
+             .text("Back pain value");
+
+            g.selectAll(".bar")
+             .data(paindata["pain"])
+             .enter().append("rect")
+             .attr("class", "bar")
+             .attr("rx", 3)
+             .attr("x", function(d) { return xScale(d.id); })
+             .attr("y", function(d) { return yScale(d.value); })
+             .attr("width", xScale.bandwidth())
+             .attr("height", function(d) { return height - yScale(d.value); });
+        //});
+        svg.append("line")
+           .attr("x1", xScale(0) + 100)
+           .attr("x2", xScale(19) + 110)
+           .attr("y1", height - yScale(average))
+           .attr("y2", height - yScale(average));
+
+        let avg_linetext = svg.append("text")
+                              .attr("y", height - yScale(average) + 5)
+                              .attr("x", xScale(19) + 150)
+                              .attr("text-anchor", "middle")
+                              .attr("class", "label")
+                              .text("Ø "+ average.toFixed(2))
+
+        // ******** OTHER CHART: BACK PAIN ***************
+
+        let svg_other_pain = d3.select("#other_backpain"),
+            margin_other_pain = 10,
+            width_other_pain = svg_other_pain.attr("width") - margin_other_pain,
+            height_other_pain = svg_other_pain.attr("height") - margin_other_pain
+
+        let xScale_other_pain = d3.scaleBand().range([0, width_other_pain]).padding(0.4),
+            yScale_other_pain = d3.scaleLinear().range([height_other_pain, 0]);
+
+        let g_other_pain = svg_other_pain.append("g")
+                                         .attr("transform", "translate(" + 0 + "," + 0 + ")");
+
+            xScale_other_pain.domain(paindata["pain"].map(function(d) { return d.id; }));
+            yScale_other_pain.domain([0, 10])
+
+        g_other_pain.selectAll(".otherbar")
+             .data(paindata["pain"])
+             .enter().append("rect")
+             .attr("class", "otherbar")
+             .attr("rx", 3)
+             .style("fill", function(d) {
+                 if (d.treatment === "baseline") { return "#E7E7E7" } else
+                 if (d.treatment === "A") { return "#CCE242" } else
+                 if (d.treatment === "B") { return "#53A0CB" } else
+                 return "black"
+             })
+             .attr("x", function(d) { return xScale_other_pain(d.id); })
+             .attr("y", function(d) { return yScale_other_pain(d.value); })
+             .attr("width", xScale_other_pain.bandwidth())
+             .attr("height", function(d) { return height_other_pain - yScale_other_pain(d.value); });
+
+        let backpain_text_baseline = svg_other_pain.append("text")
+                                                   .attr("y", yScale_other_pain(0)+10)
+                                                   .attr("x", xScale_other_pain(0)+30)
+                                                   .attr("text-anchor", "middle")
+                                                   .attr("class", "label")
+                                                   .text("Baseline")
+
+        let backpain_text_a1 = svg_other_pain.append("text")
+                                             .attr("y", yScale_other_pain(0)+10)
+                                             .attr("x", xScale_other_pain(0)+140)
+                                             .attr("text-anchor", "middle")
+                                             .attr("class", "label")
+                                             .text("Treatment A")
+
+        let backpain_text_b1 = svg_other_pain.append("text")
+                                             .attr("y", yScale_other_pain(0)+10)
+                                             .attr("x", xScale_other_pain(0)+236)
+                                             .attr("text-anchor", "middle")
+                                             .attr("class", "label")
+                                             .text("Treatment B")
+
+        let backpain_text_a2 = svg_other_pain.append("text")
+                                             .attr("y", yScale_other_pain(0)+10)
+                                             .attr("x", xScale_other_pain(0)+332)
+                                             .attr("text-anchor", "middle")
+                                             .attr("class", "label")
+                                             .text("Treatment A")
+
+        let backpain_text_b2 = svg_other_pain.append("text")
+                                             .attr("y", yScale_other_pain(0)+10)
+                                             .attr("x", xScale_other_pain(0)+428)
+                                             .attr("text-anchor", "middle")
+                                             .attr("class", "label")
+                                             .text("Treatment B")
+
+        // ******** OTHER CHART: ACTIVITY ***************
+        // ******** OTHER CHART: STRESS ***************
+        // ******** OTHER CHART: SLEEP ***************
+
+    </script>
+</body>
+</html>
