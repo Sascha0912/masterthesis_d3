@@ -1,0 +1,104 @@
+{
+  "sleep": [
+    {
+      "id": 0,
+      "value": 7.3,
+      "treatment": "baseline"
+    },
+    {
+      "id": 1,
+      "value": 7.5,
+      "treatment": "baseline"
+    },
+    {
+      "id": 2,
+      "value": 7.3,
+      "treatment": "baseline"
+    },
+    {
+      "id": 3,
+      "value": 7.9,
+      "treatment": "baseline"
+    },
+    {
+      "id": 4,
+      "value": 7.9,
+      "treatment": "A"
+    },
+    {
+      "id": 5,
+      "value": 7.5,
+      "treatment": "A"
+    },
+    {
+      "id": 6,
+      "value": 7.6,
+      "treatment": "A"
+    },
+    {
+      "id": 7,
+      "value": 7.6,
+      "treatment": "A"
+    },
+    {
+      "id": 8,
+      "value": 7.7,
+      "treatment": "B"
+    },
+    {
+      "id": 9,
+      "value": 8.5,
+      "treatment": "B"
+    },
+    {
+      "id": 10,
+      "value": 8.8,
+      "treatment": "B"
+    },
+    {
+      "id": 11,
+      "value": 7.3,
+      "treatment": "B"
+    },
+    {
+      "id": 12,
+      "value": 7.1,
+      "treatment": "A"
+    },
+    {
+      "id": 13,
+      "value": 6.6,
+      "treatment": "A"
+    },
+    {
+      "id": 14,
+      "value": 6.1,
+      "treatment": "A"
+    },
+    {
+      "id": 15,
+      "value": 5.3,
+      "treatment": "A"
+    },
+    {
+      "id": 16,
+      "value": 5.7,
+      "treatment": "B"
+    },
+    {
+      "id": 17,
+      "value": 5.9,
+      "treatment": "B"
+    },
+    {
+      "id": 18,
+      "value": 5.8,
+      "treatment": "B"
+    },
+    {
+      "id": 19,
+      "value": 6.3,
+      "treatment": "B"
+    }
+  ]
+}

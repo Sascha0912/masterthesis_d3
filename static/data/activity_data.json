@@ -1,0 +1,104 @@
+{
+  "activity": [
+    {
+      "id": 0,
+      "value": 7.8,
+      "treatment": "baseline"
+    },
+    {
+      "id": 1,
+      "value": 8.2,
+      "treatment": "baseline"
+    },
+    {
+      "id": 2,
+      "value": 8.0,
+      "treatment": "baseline"
+    },
+    {
+      "id": 3,
+      "value": 8.2,
+      "treatment": "baseline"
+    },
+    {
+      "id": 4,
+      "value": 8.2,
+      "treatment": "A"
+    },
+    {
+      "id": 5,
+      "value": 6.9,
+      "treatment": "A"
+    },
+    {
+      "id": 6,
+      "value": 6.2,
+      "treatment": "A"
+    },
+    {
+      "id": 7,
+      "value": 5.4,
+      "treatment": "A"
+    },
+    {
+      "id": 8,
+      "value": 5.5,
+      "treatment": "B"
+    },
+    {
+      "id": 9,
+      "value": 5.8,
+      "treatment": "B"
+    },
+    {
+      "id": 10,
+      "value": 6.4,
+      "treatment": "B"
+    },
+    {
+      "id": 11,
+      "value": 6.7,
+      "treatment": "B"
+    },
+    {
+      "id": 12,
+      "value": 6.9,
+      "treatment": "A"
+    },
+    {
+      "id": 13,
+      "value": 6.8,
+      "treatment": "A"
+    },
+    {
+      "id": 14,
+      "value": 6.8,
+      "treatment": "A"
+    },
+    {
+      "id": 15,
+      "value": 5.1,
+      "treatment": "A"
+    },
+    {
+      "id": 16,
+      "value": 5.8,
+      "treatment": "B"
+    },
+    {
+      "id": 17,
+      "value": 7.2,
+      "treatment": "B"
+    },
+    {
+      "id": 18,
+      "value": 7.1,
+      "treatment": "B"
+    },
+    {
+      "id": 19,
+      "value": 6.6,
+      "treatment": "B"
+    }
+  ]
+}
