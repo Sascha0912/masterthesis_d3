@@ -8,6 +8,14 @@
             font-family: Arial, serif;
             background-color: #FFFFFF;
         }
+        .box {
+            width: 460px;
+            height: auto;
+            background-color: white;
+            margin-left: 20px;
+            margin-top: 20px;
+            border-radius: 20px;
+        }
     </style>
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
@@ -15,13 +23,23 @@
     <h1>Details View</h1>
     <h2>Your Ø Level</h2>
     <div style="display: inline-block; vertical-align: top;">
-        <span style="font-size: 20px; font-weight: bold">LOW</span><img src="../static/info.png" style="margin-left: 100px; margin-top: 30px;">
+        <span style="font-size: 20px; font-weight: bold">LOW</span><img src="../static/info.png" style="margin-left: 100px; margin-top: 30px;" onclick="window.location='/info/2';">
     </div>
     <div>
         <svg id="linechart" width="500" height="400"></svg>
     </div>
     <div style="background-color: #E7E7E7; width: 500px; height: 1000px">
+        <div class="box">
+            <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
+            <p id="pvalue_percent" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">probability for getting your values compared to other patients</p>
+        </div>
 
+        <div class="box">
+            <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
+            <p id="mixedmodelres" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">probability for getting your values compared to other patients</p>
+        </div>
     </div>
 
     <script>
@@ -29,6 +47,8 @@
         let activitydata = JSON.parse('{{ activitydata | tojson | safe }}')
         let stressdata =   JSON.parse('{{ stressdata | tojson | safe }}')
         let sleepdata =    JSON.parse('{{ sleepdata | tojson | safe }}')
+        let pvalue = parseFloat('{{ pvalue }}');
+        // console.log(pvalue)
 
         let svg = d3.select("#linechart"),
             margin = 200,
@@ -73,7 +93,7 @@
 
         svg.append('g')
            .selectAll("dot")
-           .data(paindata["pain"])
+           .data(paindata["data"])
            .enter()
            .append("circle")
            .attr("cx", function (d) { return xScale(d.id); } )
@@ -82,19 +102,87 @@
            .attr("transform", "translate(" + 100 + "," + 100 + ")")
            .style("fill", "#F57600");
 
+        svg.append("g")
+            .selectAll("dot")
+            .data(paindata["data"])
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) { return xScale(d.id); } )
+            .attr("cy", function (d) { return yScale(d.avg); })
+            .attr("r", 2)
+            .attr("transform", "translate(" + 100 + "," + 100 + ")")
+            .style("fill", "#ADADAD");
+
         let line = d3.line()
                      .x(function(d) { return xScale(d.id); })
                      .y(function(d) { return yScale(d.value); })
                      .curve(d3.curveMonotoneX)
 
+        let line_compare = d3.line()
+            .x(function(d) { return xScale(d.id); })
+            .y(function(d) { return yScale(d.avg); })
+            .curve(d3.curveMonotoneX)
+
         svg.append("path")
-           .datum(paindata["pain"])
+           .datum(paindata["data"])
            .attr("class", "line")
            .attr("transform", "translate(" + 100 + "," + 100 + ")")
            .attr("d", line)
            .style("fill", "none")
            .style("stroke", "#F57600")
            .style("stroke-width", "2");
+
+        svg.append("path")
+           .datum(paindata["data"])
+           .attr("class", "line")
+           .attr("transform", "translate(" + 100 + "," + 100 + ")")
+           .attr("d", line_compare)
+           .style("fill", "none")
+           .style("stroke", "#ADADAD")
+           .style("stroke-width", "1");
+
+        svg.append("circle").attr("cx",100).attr("cy",380).attr("r", 6).style("fill", "#F57600")
+        svg.append("circle").attr("cx",200).attr("cy",380).attr("r", 6).style("fill", "#ADADAD")
+        svg.append("text").attr("x", 120).attr("y", 380).text("my data").style("font-size", "15px").attr("alignment-baseline","middle")
+        svg.append("text").attr("x", 220).attr("y", 380).text("other patients data (my age)").style("font-size", "15px").attr("alignment-baseline","middle")
+
+
+
+        stat1_text = ""
+        if (pvalue > 0.75) {
+            stat1_text = "High";
+        } else if (pvalue > 0.50) {
+            stat1_text = "Moderate";
+        }  else if (pvalue > 0.3) {
+            stat1_text = "Small"
+        } else {
+            stat1_text = "Almost no"
+        }
+        document.getElementById("pvalue_percent").innerText = stat1_text
+
+
+
+
+        // ******** COMPARE CHART ***********
+        /*
+        let svg_compare = d3.select("#comparechart"),
+            margin_compare = 200,
+            width_compare = svg_compare.attr("width") - margin_compare,
+            height_compare = svg_compare.attr("height") - margin_compare
+
+        let xScale_compare = d3.scaleLinear().domain([0, 19]).range([0, width_compare]),
+            yScale_compare = d3.scaleLinear().domain([0, 10]).range([height_compare, 0]);
+
+        let g_compare = svg_compare.append("g")
+                                   .attr("transform", "translate(" + 100 + "," + 100 + ")");*/
+
+
+
+
+
+
+
+
 
 
 

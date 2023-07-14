@@ -1,5 +1,7 @@
 import os
 from flask import Flask, render_template, url_for, json
+import numpy as np
+from stats import ttest, mixedmodel, linearregression
 
 app = Flask(__name__)
 
@@ -48,11 +50,28 @@ def details(trendid):
     stressdata = json.load(open(json_url3))
     sleepdata = json.load(open(json_url4))
 
+    my_pain_data_arr = [d["value"] for d in paindata["data"]]
+    avg_pain_data_arr = [d["avg"] for d in paindata["data"]]
+    # print(my_pain_data_arr)
+    # print(avg_pain_data_arr)
+    # print(np.var(my_pain_data_arr), np.var(avg_pain_data_arr))
+
+    ttest_res = ttest(my_pain_data_arr, avg_pain_data_arr)
+    # lmm_res = mixedmodel(paindata["data"])
+    lin_res = linearregression(paindata["data"])
+
     return render_template('details.html',
                            paindata=paindata,
                            activitydata=activitydata,
                            stressdata=stressdata,
                            sleepdata=sleepdata,
+                           pvalue=ttest_res[1],
+                           trendid=trendid)
+
+
+@app.route('/info/<int:trendid>')
+def info(trendid):
+    return render_template('info.html',
                            trendid=trendid)
 
 
