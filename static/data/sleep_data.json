@@ -1,103 +1,128 @@
 {
-  "sleep": [
+  "metadata": [
+    {
+      "name": "Quality of sleep"
+    }
+  ],
+  "data": [
     {
       "id": 0,
       "value": 7.3,
+      "avg": 7.5,
       "treatment": "baseline"
     },
     {
       "id": 1,
       "value": 7.5,
+      "avg": 7.1,
       "treatment": "baseline"
     },
     {
       "id": 2,
       "value": 7.3,
+      "avg": 7.6,
       "treatment": "baseline"
     },
     {
       "id": 3,
       "value": 7.9,
+      "avg": 7.8,
       "treatment": "baseline"
     },
     {
       "id": 4,
       "value": 7.9,
+      "avg": 8.1,
       "treatment": "A"
     },
     {
       "id": 5,
       "value": 7.5,
+      "avg": 7.2,
       "treatment": "A"
     },
     {
       "id": 6,
       "value": 7.6,
+      "avg": 7.8,
       "treatment": "A"
     },
     {
       "id": 7,
       "value": 7.6,
+      "avg": 7.1,
       "treatment": "A"
     },
     {
       "id": 8,
       "value": 7.7,
+      "avg": 7.4,
       "treatment": "B"
     },
     {
       "id": 9,
       "value": 8.5,
+      "avg": 8.2,
       "treatment": "B"
     },
     {
       "id": 10,
       "value": 8.8,
+      "avg": 8.4,
       "treatment": "B"
     },
     {
       "id": 11,
       "value": 7.3,
+      "avg": 8.0,
       "treatment": "B"
     },
     {
       "id": 12,
       "value": 7.1,
+      "avg": 7.5,
       "treatment": "A"
     },
     {
       "id": 13,
       "value": 6.6,
+      "avg": 6.8,
       "treatment": "A"
     },
     {
       "id": 14,
       "value": 6.1,
+      "avg": 6.3,
       "treatment": "A"
     },
     {
       "id": 15,
       "value": 5.3,
+      "avg": 5.4,
       "treatment": "A"
     },
     {
       "id": 16,
       "value": 5.7,
+      "avg": 5.3,
       "treatment": "B"
     },
     {
       "id": 17,
       "value": 5.9,
+      "avg": 5.6,
       "treatment": "B"
     },
     {
       "id": 18,
       "value": 5.8,
+      "avg": 5.4,
       "treatment": "B"
     },
     {
       "id": 19,
       "value": 6.3,
+      "avg": 6.2,
       "treatment": "B"
     }
   ]

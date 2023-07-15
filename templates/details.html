@@ -20,15 +20,16 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
-    <h1>Details View</h1>
+    <img src="../static/backarrow.png" onclick="history.back()" style="margin-right: 30px">
+    <h1 style="display: inline">Details View</h1>
     <h2>Your Ø Level</h2>
     <div style="display: inline-block; vertical-align: top;">
-        <span style="font-size: 20px; font-weight: bold">LOW</span><img src="../static/info.png" style="margin-left: 100px; margin-top: 30px;" onclick="window.location='/info/2';">
+        <span id="avg_level" style="font-size: 20px; font-weight: bold">LOW</span><img src="../static/info.png" style="margin-left: 100px; margin-top: 30px;" onclick="window.location='/info/'+'{{ trendid }}';" alt="">
     </div>
     <div>
         <svg id="linechart" width="500" height="400"></svg>
     </div>
-    <div style="background-color: #E7E7E7; width: 500px; height: 1000px">
+    <div style="background-color: #E7E7E7; width: 500px; height: auto; padding-top: 10px; padding-bottom: 10px;">
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
             <p id="pvalue_percent" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
@@ -37,8 +38,20 @@
 
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
-            <p id="mixedmodelres" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
-            <p style="margin-left: 10px; padding-bottom: 10px">probability for getting your values compared to other patients</p>
+            <p id="linmodelres" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">predicted value if treatment pattern is continued</p>
+        </div>
+
+        <div class="box">
+            <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
+            <p id="mixedmodelres_a" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only treatment A is still performed</p>
+        </div>
+
+        <div class="box">
+            <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
+            <p id="mixedmodelres_b" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only treatment B is still performed</p>
         </div>
     </div>
 
@@ -47,8 +60,18 @@
         let activitydata = JSON.parse('{{ activitydata | tojson | safe }}')
         let stressdata =   JSON.parse('{{ stressdata | tojson | safe }}')
         let sleepdata =    JSON.parse('{{ sleepdata | tojson | safe }}')
+
+        let trendid = '{{ trendid }}';
+
         let pvalue = parseFloat('{{ pvalue }}');
+        let lin_pred_1 = parseFloat('{{ lin_pred_1 }}');
+        let lmm_pred_a = parseFloat('{{ lmm_pred_a }}');
+        let lmm_pred_b = parseFloat('{{ lmm_pred_b }}');
+
         // console.log(pvalue)
+        // console.log(lin_pred_1)
+        // console.log(lmm_pred_a)
+        // console.log(lmm_pred_b)
 
         let svg = d3.select("#linechart"),
             margin = 200,
@@ -67,7 +90,19 @@
            .attr('text-anchor', 'middle')
            .style('font-family', 'Arial')
            .style('font-size', 20)
-           .text('Back pain');
+           .text(function(d){
+               if (trendid==1) {
+                   return activitydata['metadata'][0]['name'];
+               } else if(trendid==2) {
+                   return paindata["metadata"][0]['name'];
+               } else if (trendid==3) {
+                   return stressdata["metadata"][0]['name'];
+               } else if (trendid==4) {
+                   return sleepdata["metadata"][0]['name'];
+               } else {
+                   return paindata["metadata"][0]['name'];
+               }
+           });
 
         svg.append('text')
            .attr('x', width/2 + 100)
@@ -82,7 +117,19 @@
            .attr('transform', 'translate(60,' + height + ')rotate(-90)')
            .style('font-family', 'Arial')
            .style('font-size', 12)
-           .text('Back pain value');
+           .text(function(d){
+               if (trendid==1) {
+                   return activitydata['metadata'][0]['name'] + " value";
+               } else if(trendid==2) {
+                   return paindata["metadata"][0]['name'] + " value";
+               } else if (trendid==3) {
+                   return stressdata["metadata"][0]['name'] + " value";
+               } else if (trendid==4) {
+                   return sleepdata["metadata"][0]['name'] + " value";
+               } else {
+                   return paindata["metadata"][0]['name'] + " value";
+               }
+           });
 
         g.append("g")
          .attr("transform", "translate(0," + height + ")")
@@ -93,7 +140,19 @@
 
         svg.append('g')
            .selectAll("dot")
-           .data(paindata["data"])
+           .data(function(d) {
+               if (trendid==1) {
+                   return activitydata['data'];
+               } else if(trendid==2) {
+                   return paindata["data"]
+               } else if (trendid==3) {
+                   return stressdata["data"]
+               } else if (trendid==4) {
+                   return sleepdata["data"]
+               } else {
+                   return paindata["data"]
+               }
+           })
            .enter()
            .append("circle")
            .attr("cx", function (d) { return xScale(d.id); } )
@@ -104,7 +163,19 @@
 
         svg.append("g")
             .selectAll("dot")
-            .data(paindata["data"])
+            .data(function(d) {
+                if (trendid==1) {
+                     return activitydata['data'];
+                 } else if(trendid==2) {
+                     return paindata["data"]
+                 } else if (trendid==3) {
+                     return stressdata["data"]
+                 } else if (trendid==4) {
+                     return sleepdata["data"]
+                 } else {
+                     return paindata["data"]
+                 }
+            })
             .enter()
             .append("circle")
             .attr("cx", function (d) { return xScale(d.id); } )
@@ -124,7 +195,19 @@
             .curve(d3.curveMonotoneX)
 
         svg.append("path")
-           .datum(paindata["data"])
+           .datum(function(d){
+               if (trendid==1) {
+                     return activitydata['data'];
+                 } else if(trendid==2) {
+                     return paindata["data"]
+                 } else if (trendid==3) {
+                     return stressdata["data"]
+                 } else if (trendid==4) {
+                     return sleepdata["data"]
+                 } else {
+                     return paindata["data"]
+                 }
+           })
            .attr("class", "line")
            .attr("transform", "translate(" + 100 + "," + 100 + ")")
            .attr("d", line)
@@ -133,7 +216,19 @@
            .style("stroke-width", "2");
 
         svg.append("path")
-           .datum(paindata["data"])
+           .datum(function(d){
+               if (trendid==1) {
+                     return activitydata['data'];
+                 } else if(trendid==2) {
+                     return paindata["data"]
+                 } else if (trendid==3) {
+                     return stressdata["data"]
+                 } else if (trendid==4) {
+                     return sleepdata["data"]
+                 } else {
+                     return paindata["data"]
+                 }
+           })
            .attr("class", "line")
            .attr("transform", "translate(" + 100 + "," + 100 + ")")
            .attr("d", line_compare)
@@ -151,7 +246,7 @@
         stat1_text = ""
         if (pvalue > 0.75) {
             stat1_text = "High";
-        } else if (pvalue > 0.50) {
+        } else if (pvalue > 0.5) {
             stat1_text = "Moderate";
         }  else if (pvalue > 0.3) {
             stat1_text = "Small"
@@ -159,6 +254,42 @@
             stat1_text = "Almost no"
         }
         document.getElementById("pvalue_percent").innerText = stat1_text
+
+        document.getElementById("linmodelres").innerText= lin_pred_1.toFixed(2)
+
+        document.getElementById("mixedmodelres_a").innerText = lmm_pred_a.toFixed(2)
+        document.getElementById("mixedmodelres_b").innerText = lmm_pred_b.toFixed(2)
+
+        avg_level = ""
+        if (trendid==1) {
+            const sum_activity = Object.values(activitydata["data"]).reduce((acc, current) => acc + current.value, 0);
+            const average_activity = sum_activity / Object.values(activitydata["data"]).length;
+            console.log(average_activity)
+            avg_level = ((average_activity > 6.6) ? "High" : (average_activity > 3.3) ? "Low" : "Very Low");
+        } else if(trendid==2) {
+            const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
+            const average_pain = sum_pain / Object.values(paindata["data"]).length;
+            console.log(average_pain)
+            avg_level = ((average_pain > 6.6) ? "High" : (average_pain > 3.3) ? "Low" : "Very Low");
+        } else if (trendid==3) {
+            const sum_stress = Object.values(stressdata["data"]).reduce((acc, current) => acc + current.value, 0);
+            const average_stress = sum_stress / Object.values(stressdata["data"]).length;
+            console.log(average_stress)
+            avg_level = ((average_stress > 6.6) ? "High" : (average_stress > 3.3) ? "Low" : "Very Low");
+        } else if (trendid==4) {
+            const sum_sleep = Object.values(sleepdata["data"]).reduce((acc, current) => acc + current.value, 0);
+            const average_sleep = sum_sleep / Object.values(sleepdata["data"]).length;
+            console.log(average_sleep)
+            avg_level = ((average_sleep > 6.6) ? "High" : (average_sleep > 3.3) ? "Low" : "Very Low");
+        } else {
+            const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
+            const average_pain = sum_pain / Object.values(paindata["data"]).length;
+            console.log(average_pain)
+            avg_level = ((average_pain > 6.6) ? "High" : (average_pain > 3.3) ? "Low" : "Very Low");
+        }
+
+        document.getElementById("avg_level").innerText = avg_level;
+
 
 
 
@@ -175,16 +306,6 @@
 
         let g_compare = svg_compare.append("g")
                                    .attr("transform", "translate(" + 100 + "," + 100 + ")");*/
-
-
-
-
-
-
-
-
-
-
 
     </script>
 </body>

@@ -31,13 +31,14 @@
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
-    <h1>Your development</h1>
-    <h2>monthly view</h2>
+    <img src="../static/backarrow.png" onclick="history.back()" style="margin-right: 30px">
+    <h1 id="title" style="display: inline">Your development</h1>
+    <h2 style="color: #ADADAD">monthly view</h2>
 
     <svg id="trendchart" width="600" height="500"></svg>
 
     <div id="other_container">
-        <h2 style="margin: 20px">Other trends</h2>
+        <h2 style="margin: 20px; padding-top: 10px">More trends</h2>
 
         <div class="trendbox" onclick="window.location='/details/2'">
             <div style="display: inline-block; vertical-align: top">
@@ -107,20 +108,20 @@
         let sleepdata =    JSON.parse('{{ sleepdata | tojson | safe }}')
 
         let trendid = '{{ trendid }}';
-        console.log(trendid)
+        // console.log(trendid)
 
 
-        const sum_pain = Object.values(paindata["pain"]).reduce((acc, current) => acc + current.value, 0);
-        const average_pain = sum_pain / Object.values(paindata["pain"]).length;
+        const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
+        const average_pain = sum_pain / Object.values(paindata["data"]).length;
 
-        const sum_activity = Object.values(activitydata["activity"]).reduce((acc, current) => acc + current.value, 0);
-        const average_activity = sum_activity / Object.values(activitydata["activity"]).length;
+        const sum_activity = Object.values(activitydata["data"]).reduce((acc, current) => acc + current.value, 0);
+        const average_activity = sum_activity / Object.values(activitydata["data"]).length;
 
-        const sum_stress = Object.values(stressdata["stress"]).reduce((acc, current) => acc + current.value, 0);
-        const average_stress = sum_stress / Object.values(stressdata["stress"]).length;
+        const sum_stress = Object.values(stressdata["data"]).reduce((acc, current) => acc + current.value, 0);
+        const average_stress = sum_stress / Object.values(stressdata["data"]).length;
 
-        const sum_sleep = Object.values(sleepdata["sleep"]).reduce((acc, current) => acc + current.value, 0);
-        const average_sleep = sum_sleep / Object.values(sleepdata["sleep"]).length;
+        const sum_sleep = Object.values(sleepdata["data"]).reduce((acc, current) => acc + current.value, 0);
+        const average_sleep = sum_sleep / Object.values(sleepdata["data"]).length;
 
         // ********** TRENDCHART **************
 
@@ -143,15 +144,15 @@
                    .attr("transform", "translate(" + 100 + "," + 100 + ")");
 
         if (trendid==1) {
-            xScale.domain(activitydata["activity"].map(function(d) { return d.id; }));
+            xScale.domain(activitydata["data"].map(function(d) { return d.id; }));
         } else if (trendid==2) {
-            xScale.domain(paindata["pain"].map(function(d) { return d.id; }));
+            xScale.domain(paindata["data"].map(function(d) { return d.id; }));
         } else if (trendid==3) {
-            xScale.domain(stressdata["stress"].map(function(d) { return d.id; }));
+            xScale.domain(stressdata["data"].map(function(d) { return d.id; }));
         } else if (trendid==4) {
-            xScale.domain(sleepdata["sleep"].map(function(d) { return d.id; }));
+            xScale.domain(sleepdata["data"].map(function(d) { return d.id; }));
         } else {
-            xScale.domain(paindata["pain"].map(function(d) { return d.id; }));  // default: pain data
+            xScale.domain(paindata["data"].map(function(d) { return d.id; }));  // default: pain data
         }
 
             yScale.domain([0, 10])
@@ -194,15 +195,15 @@
             g.selectAll(".bar")
              .data(function(d){
                  if (trendid==1) {
-                     return activitydata['activity'];
+                     return activitydata['data'];
                  } else if(trendid==2) {
-                     return paindata["pain"]
+                     return paindata["data"]
                  } else if (trendid==3) {
-                     return stressdata["stress"]
+                     return stressdata["data"]
                  } else if (trendid==4) {
-                     return sleepdata["sleep"]
+                     return sleepdata["data"]
                  } else {
-                     return paindata["pain"]
+                     return paindata["data"]
                  }
              })
              .enter().append("rect")
@@ -296,11 +297,11 @@
         let g_other_pain = svg_other_pain.append("g")
                                          .attr("transform", "translate(" + 0 + "," + 0 + ")");
 
-            xScale_other_pain.domain(paindata["pain"].map(function(d) { return d.id; }));
+            xScale_other_pain.domain(paindata["data"].map(function(d) { return d.id; }));
             yScale_other_pain.domain([0, 10])
 
         g_other_pain.selectAll(".otherbar")
-             .data(paindata["pain"])
+             .data(paindata["data"])
              .enter().append("rect")
              .attr("class", "otherbar")
              .attr("rx", 3)
@@ -387,11 +388,11 @@
         let g_other_activity = svg_other_activity.append("g")
                                                  .attr("transform", "translate(" + 0 + "," + 0 + ")");
 
-            xScale_other_activity.domain(activitydata["activity"].map(function(d) { return d.id; }));
+            xScale_other_activity.domain(activitydata["data"].map(function(d) { return d.id; }));
             yScale_other_activity.domain([0, 10])
 
         g_other_activity.selectAll(".otherbar")
-             .data(activitydata["activity"])
+             .data(activitydata["data"])
              .enter().append("rect")
              .attr("class", "otherbar")
              .attr("rx", 3)
@@ -478,11 +479,11 @@
         let g_other_stress = svg_other_stress.append("g")
                                                  .attr("transform", "translate(" + 0 + "," + 0 + ")");
 
-            xScale_other_stress.domain(stressdata["stress"].map(function(d) { return d.id; }));
+            xScale_other_stress.domain(stressdata["data"].map(function(d) { return d.id; }));
             yScale_other_stress.domain([0, 10])
 
         g_other_stress.selectAll(".otherbar")
-             .data(stressdata["stress"])
+             .data(stressdata["data"])
              .enter().append("rect")
              .attr("class", "otherbar")
              .attr("rx", 3)
@@ -569,11 +570,11 @@
         let g_other_sleep = svg_other_sleep.append("g")
                                                  .attr("transform", "translate(" + 0 + "," + 0 + ")");
 
-            xScale_other_sleep.domain(sleepdata["sleep"].map(function(d) { return d.id; }));
+            xScale_other_sleep.domain(sleepdata["data"].map(function(d) { return d.id; }));
             yScale_other_sleep.domain([0, 10])
 
         g_other_sleep.selectAll(".otherbar")
-             .data(sleepdata["sleep"])
+             .data(sleepdata["data"])
              .enter().append("rect")
              .attr("class", "otherbar")
              .attr("rx", 3)
@@ -646,6 +647,20 @@
            .attr("x2", 389)
            .attr("y1", yScale_other_sleep(0))
            .attr("y2", yScale_other_sleep(10));
+
+        if (trendid==1) {
+            document.getElementById("title").innerText = "Your Activity development";
+        } else if(trendid==2) {
+            document.getElementById("title").innerText = "Your Back pain development";
+        } else if (trendid==3) {
+            document.getElementById("title").innerText = "Your Stress development";
+        } else if (trendid==4) {
+            document.getElementById("title").innerText = "Your Quality of sleep development";
+        } else {
+            document.getElementById("title").innerText = "Your Back pain development";
+        }
+
+
 
     </script>
 </body>

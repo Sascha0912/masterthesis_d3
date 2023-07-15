@@ -1,103 +1,128 @@
 {
-  "stress": [
+  "metadata": [
+    {
+      "name": "Stress"
+    }
+  ],
+  "data": [
     {
       "id": 0,
       "value": 7.8,
+      "avg": 7.7,
       "treatment": "baseline"
     },
     {
       "id": 1,
       "value": 8.2,
+      "avg": 8.3,
       "treatment": "baseline"
     },
     {
       "id": 2,
       "value": 7.7,
+      "avg": 7.3,
       "treatment": "baseline"
     },
     {
       "id": 3,
       "value": 8.4,
+      "avg": 8.2,
       "treatment": "baseline"
     },
     {
       "id": 4,
       "value": 7.0,
+      "avg": 7.2,
       "treatment": "A"
     },
     {
       "id": 5,
       "value": 7.0,
+      "avg": 7.3,
       "treatment": "A"
     },
     {
       "id": 6,
       "value": 7.3,
+      "avg": 7.1,
       "treatment": "A"
     },
     {
       "id": 7,
       "value": 7.4,
+      "avg": 7.7,
       "treatment": "A"
     },
     {
       "id": 8,
       "value": 7.3,
+      "avg": 7.1,
       "treatment": "B"
     },
     {
       "id": 9,
       "value": 7.1,
+      "avg": 7.7,
       "treatment": "B"
     },
     {
       "id": 10,
       "value": 6.8,
+      "avg": 6.3,
       "treatment": "B"
     },
     {
       "id": 11,
       "value": 6.7,
+      "avg": 6.2,
       "treatment": "B"
     },
     {
       "id": 12,
       "value": 6.1,
+      "avg": 6.5,
       "treatment": "A"
     },
     {
       "id": 13,
       "value": 6.6,
+      "avg": 6.2,
       "treatment": "A"
     },
     {
       "id": 14,
       "value": 6.5,
+      "avg": 6.3,
       "treatment": "A"
     },
     {
       "id": 15,
       "value": 5.3,
+      "avg": 5.6,
       "treatment": "A"
     },
     {
       "id": 16,
       "value": 5.7,
+      "avg": 5.8,
       "treatment": "B"
     },
     {
       "id": 17,
       "value": 5.3,
+      "avg": 5.9,
       "treatment": "B"
     },
     {
       "id": 18,
       "value": 6.8,
+      "avg": 6.7,
       "treatment": "B"
     },
     {
       "id": 19,
       "value": 6.6,
+      "avg": 6.9,
       "treatment": "B"
     }
   ]
