@@ -1,7 +1,8 @@
 {
   "metadata": [
     {
-      "name": "Back pain"
+      "name": "Back pain",
+      "time unit": "week"
     }
   ],
   "data": [

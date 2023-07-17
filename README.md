@@ -10,6 +10,10 @@ The required data format is JSON.
 The data needs to be prepared in the following way:
 ```json
 {
+  "metadata": [
+    "name": <String>,
+    "time unit": <String>
+  ],
   "data": [
     {
       "id": <number, unique>,

@@ -1,7 +1,8 @@
 {
   "metadata": [
     {
-      "name": "Stress"
+      "name": "Stress",
+      "time unit": "week"
     }
   ],
   "data": [

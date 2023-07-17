@@ -1,7 +1,8 @@
 {
   "metadata": [
     {
-      "name": "Quality of sleep"
+      "name": "Quality of sleep",
+      "time unit": "week"
     }
   ],
   "data": [
@@ -121,8 +122,8 @@
     },
     {
       "id": 19,
-      "value": 6.3,
-      "avg": 6.2,
+      "value": 3.3,
+      "avg": 3.9,
       "treatment": "B"
     }
   ]

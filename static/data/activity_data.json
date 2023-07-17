@@ -1,7 +1,8 @@
 {
   "metadata": [
     {
-      "name": "Activity"
+      "name": "Activity",
+      "time unit": "week"
     }
   ],
   "data": [

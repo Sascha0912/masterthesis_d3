@@ -33,7 +33,7 @@
 <body>
     <img src="../static/backarrow.png" onclick="history.back()" style="margin-right: 30px">
     <h1 id="title" style="display: inline">Your development</h1>
-    <h2 style="color: #ADADAD">monthly view</h2>
+    <h2 style="color: #ADADAD; margin-left: 145px">monthly view</h2>
 
     <svg id="trendchart" width="600" height="500"></svg>
 
@@ -50,7 +50,7 @@
             <div class="arrow" style="display: inline-block; vertical-align: top;">
                 <img src="../static/arrow.png" style="margin-left: 340px; height: 30px; margin-top: 10px" alt="">
             </div>
-            <p style="margin-left: 10px; margin-right: 10px;">placeholder</p>
+            <p id="pain_trend" style="margin-left: 10px; margin-right: 10px;">placeholder</p>
             <hr style="margin-left: 10px; margin-right: 10px">
             <svg id="other_backpain" width="500" height="100"></svg>
         </div>
@@ -65,7 +65,7 @@
             <div class="arrow" style="display: inline-block; vertical-align: top;">
                 <img src="../static/arrow.png" style="margin-left: 365px; height: 30px; margin-top: 10px" alt="">
             </div>
-            <p style="margin-left: 10px; margin-right: 10px;">placeholder</p>
+            <p id="activity_trend" style="margin-left: 10px; margin-right: 10px;">placeholder</p>
             <hr style="margin-left: 10px; margin-right: 10px">
             <svg id="other_activity" width="500" height="100"></svg>
         </div>
@@ -80,7 +80,7 @@
             <div class="arrow" style="display: inline-block; vertical-align: top;">
                 <img src="../static/arrow.png" style="margin-left: 362px; height: 30px; margin-top: 10px" alt="">
             </div>
-            <p style="margin-left: 10px; margin-right: 10px;">placeholder</p>
+            <p id="stress_trend" style="margin-left: 10px; margin-right: 10px;">placeholder</p>
             <hr style="margin-left: 10px; margin-right: 10px">
             <svg id="other_stress" width="500" height="100"></svg>
         </div>
@@ -95,7 +95,7 @@
             <div class="arrow" style="display: inline-block; vertical-align: top;">
                 <img src="../static/arrow.png" style="margin-left: 300px; height: 30px; margin-top: 10px" alt="">
             </div>
-            <p style="margin-left: 10px; margin-right: 10px;">placeholder</p>
+            <p id="sleep_trend" style="margin-left: 10px; margin-right: 10px;">placeholder</p>
             <hr style="margin-left: 10px; margin-right: 10px">
             <svg id="other_sleep" width="500" height="100"></svg>
         </div>
@@ -108,7 +108,13 @@
         let sleepdata =    JSON.parse('{{ sleepdata | tojson | safe }}')
 
         let trendid = '{{ trendid }}';
-        // console.log(trendid)
+
+        let pain_per_treatment = '{{ pain_per_treatment }}';
+        let activity_per_treatment = '{{ activity_per_treatment }}';
+        let stress_per_treatment = '{{ stress_per_treatment }}';
+        let sleep_per_treatment = '{{ sleep_per_treatment }}';
+
+        // console.log(pain_per_treatment);
 
 
         const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
@@ -213,7 +219,7 @@
              .attr("y", function(d) { return yScale(d.value); })
              .attr("width", xScale.bandwidth())
              .attr("height", function(d) {
-                 console.log(height - yScale(d.value));
+                 // console.log(height - yScale(d.value));
                  return height - yScale(d.value);
              });
         //});
@@ -659,6 +665,18 @@
         } else {
             document.getElementById("title").innerText = "Your Back pain development";
         }
+
+        document.getElementById("pain_trend").textContent = "Treatment A average: " + pain_per_treatment.split(",")[0].substring(1)
+            + "   Treatment B average: " + pain_per_treatment.split(",")[1].slice(0, -1);
+
+        document.getElementById("activity_trend").textContent = "Treatment A average: " + activity_per_treatment.split(",")[0].substring(1)
+            + "   Treatment B average: " + activity_per_treatment.split(",")[1].slice(0, -1);
+
+        document.getElementById("stress_trend").textContent = "Treatment A average: " + stress_per_treatment.split(",")[0].substring(1)
+            + "   Treatment B average: " + stress_per_treatment.split(",")[1].slice(0, -1);
+
+        document.getElementById("sleep_trend").textContent = "Treatment A average: " + sleep_per_treatment.split(",")[0].substring(1)
+            + "   Treatment B average: " + sleep_per_treatment.split(",")[1].slice(0, -1);
 
 
 

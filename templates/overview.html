@@ -30,8 +30,10 @@
         <div class="arrow" style="display: inline-block; vertical-align: top;">
             <img src="../static/arrow.png" style="margin-left: 350px; height: 30px; margin-top: 10px" alt="">
         </div>
-        <div style="display: block">
-            Hallo Welt!
+        <div style="position: relative; display: inline-block">
+            <img src="../static/person-standing.png" style="height: 40px; position: absolute; top: 10px; left: 40px;">
+            <svg id="activity_slider" width="460px" height="60px"></svg>
+            <img src="../static/person_walking.png" style="height: 40px; position: absolute; top: 10px; left: 410px;">
         </div>
     </div>
 
@@ -45,16 +47,25 @@
         <div class="arrow" style="display: inline-block; vertical-align: top;">
             <img src="../static/arrow.png" style="margin-left: 320px; margin-top: 15px; height: 30px" alt="">
         </div>
+
+
+
         <div style="display: inline-block">
             <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
-                <span style="color: #88F5BA;">Less</span> pain
+                <span id="level_pain_text" style="color: #88F5BA;">Less</span> pain
             </div>
+            <!--
             <div style="display: inline; height: 30px; width: 80px; background-color: #88F5BA; margin-left: 260px; color: #26E82D; stroke: #007805; border-radius: 5px">
                 <img src="../static/greendot.png" style="height: 14px; margin-right: 10px;margin-left: 5px">8.2 / 10
+            </div>-->
+            <div style="display: block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                since last measurement
             </div>
-            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
-                than last week
-            </div>
+            <svg id="pain_level" style="display: inline" width="500"></svg>
+
+
+
+            <!--
             <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 281px; color: #26E82D; stroke: #007805; border-radius: 5px">
                 <span style="visibility: hidden">8.2 / 10-----</span>
             </div>
@@ -63,7 +74,7 @@
             </div>
             <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 281px; color: #26E82D; stroke: #007805; border-radius: 5px">
                 <span style="visibility: hidden">8.2 / 10-----</span>
-            </div>
+            </div>-->
         </div>
 
 
@@ -82,14 +93,18 @@
         </div>
         <div style="display: inline-block">
             <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
-                <span style="color: #F2DD20;">Medium</span> stress level
+                <span id="level_stress_text" style="color: #F2DD20;">Medium</span> stress level
             </div>
+            <!--
             <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 120px; color: #26E82D; stroke: #007805; border-radius: 5px">
                 <span style="visibility: hidden">5.1 / 10-----</span>
+            </div>-->
+            <div style="display: block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                at last acquisition
             </div>
-            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
-                last week
-            </div>
+
+            <svg id="stress_level" style="display: inline" width="500"></svg>
+            <!--
             <div style="display: inline; height: 30px; width: 80px; background-color: #F2DD20; margin-left: 306px; color: #FFC700; stroke: #007805; border-radius: 5px">
                 <img src="../static/yellowdot.png" style="height: 14px; margin-right: 10px;margin-left: 5px"><span>5.1 / 10</span>
             </div>
@@ -98,7 +113,7 @@
             </div>
             <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 306px; color: #26E82D; stroke: #007805; border-radius: 5px">
                 <span style="visibility: hidden">5.1 / 10-----</span>
-            </div>
+            </div>-->
         </div>
     </div>
 
@@ -114,14 +129,17 @@
         </div>
         <div style="display: inline-block">
             <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
-                <span style="color: #EC6161;">Poor</span> quality of sleep
+                <span id="level_sleep_text" style="color: #EC6161;">Poor</span> quality of sleep
             </div>
+            <!--
             <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 120px; color: #26E82D; stroke: #007805; border-radius: 5px">
                 <span style="visibility: hidden">3.2 / 10-----</span>
+            </div>-->
+            <div style="display: block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
+                at last acquisition
             </div>
-            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
-                last week
-            </div>
+            <svg id="sleep_level" style="display: inline" width="500"></svg>
+            <!--
             <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 315px; color: #FFC700; stroke: #007805; border-radius: 5px">
                 <span style="visibility: hidden">3.2 / 10-----</span>
             </div>
@@ -130,11 +148,168 @@
             </div>
             <div style="display: inline; height: 30px; width: 80px; background-color: #EC6161; margin-left: 315px; color: #DA1B1B; stroke: #007805; border-radius: 5px">
                 <img src="../static/reddot.png" style="height: 14px; margin-right: 10px;margin-left: 5px"><span>3.2 / 10</span>
-            </div>
+            </div>-->
         </div>
     </div>
     <script>
-        {#let chord = d3.layout.chord()#}
+        let paindata =     JSON.parse('{{ paindata | tojson | safe }}')
+        let activitydata = JSON.parse('{{ activitydata | tojson | safe }}')
+        let stressdata =   JSON.parse('{{ stressdata | tojson | safe }}')
+        let sleepdata =    JSON.parse('{{ sleepdata | tojson | safe }}')
+
+        function scale(number, inMin, inMax, outMin, outMax) {
+            return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+        }
+
+        // console.log(activitydata)
+        let svg = d3.select("#activity_slider")
+
+        svg.append("rect")
+            .attr("x", 80)
+            .attr("y", 20)
+            .attr("width", 320)
+            .attr("height", 25)
+            .attr("rx", 20)
+            .attr("fill", "#FF7A00");
+
+        svg.append("circle")
+            .attr("r", 20)
+            .attr("cx", function(d) {
+                recent_activity = activitydata["data"][19]["value"]
+                // in 0 - 10
+                // out 80 - 400
+                return scale(recent_activity, 0, 10, 80, 400)
+            })
+            .attr("cy", 33)
+            .attr("fill", "#E7E7E7")
+
+        svg.append("text")
+            .attr("x", 85)
+            .attr("y", 10)
+            .attr("dy", ".35em")
+            .text("Very low")
+
+        svg.append("text")
+            .attr("x", 360)
+            .attr("y", 10)
+            .attr("dy", ".35em")
+            .text("High")
+
+        if (paindata["data"][19]["value"] >= paindata["data"][18]["value"]) {
+            document.getElementById("level_pain_text").innerText = "More";
+            document.getElementById("level_pain_text").style.color = "#EC6161";
+        } else {
+            document.getElementById("level_pain_text").innerText = "Less";
+            document.getElementById("level_pain_text").style.color = "#88F5BA";
+            console.log("Hallo hier bin ich")
+        }
+
+        if (stressdata["data"][19]["value"] >= 7) {
+            document.getElementById("level_stress_text").innerText = "High";
+            document.getElementById("level_stress_text").style.color = "#EC6161";
+        } else if (stressdata["data"][19]["value"] >= 4) {
+            document.getElementById("level_stress_text").innerText = "Moderate";
+            document.getElementById("level_stress_text").style.color = "#F2DD20";
+        } else {
+            document.getElementById("level_stress_text").innerText = "Low";
+            document.getElementById("level_stress_text").style.color = "#88F5BA";
+        }
+
+
+        if (sleepdata["data"][19]["value"] >= 7) {
+            document.getElementById("level_sleep_text").innerText = "High";
+            document.getElementById("level_sleep_text").style.color = "#88F5BA";
+        } else if (sleepdata["data"][19]["value"] >= 4) {
+            document.getElementById("level_sleep_text").innerText = "Moderate";
+            document.getElementById("level_sleep_text").style.color = "#F2DD20";
+        } else {
+            document.getElementById("level_sleep_text").innerText = "Low";
+            document.getElementById("level_sleep_text").style.color = "#EC6161";
+        }
+
+        let svg_pain = d3.select("#pain_level")
+
+        svg_pain.append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", 80)
+                .attr("height", 22)
+                .attr("rx", 5)
+                .attr("transform", "translate(410,0)")
+                .attr("fill", function (d){
+                    if (paindata["data"][19]["value"] >= 7) {
+                        return "#EC6161";
+                    } else if (paindata["data"][19]["value"] >= 4) {
+                        return "#F2DD20";
+                    } else {
+                        return "#88F5BA";
+                    }
+                });
+
+        svg_pain.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("transform", "translate(420,10)")
+                .attr("dy", ".35em")
+                .text(function (d) {
+                    return paindata["data"][19]["value"] + " / 10"
+                })
+
+        let svg_stress = d3.select("#stress_level")
+
+        svg_stress.append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", 80)
+                .attr("height", 22)
+                .attr("rx", 5)
+                .attr("transform", "translate(410,0)")
+                .attr("fill", function (d){
+                    if (stressdata["data"][19]["value"] >= 7) {
+                        return "#EC6161";
+                    } else if (stressdata["data"][19]["value"] >= 4) {
+                        return "#F2DD20";
+                    } else {
+                        return "#88F5BA";
+                    }
+                });
+
+        svg_stress.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("transform", "translate(420,10)")
+                .attr("dy", ".35em")
+                .text(function (d) {
+                    return stressdata["data"][19]["value"] + " / 10"
+                })
+
+        let svg_sleep = d3.select("#sleep_level")
+
+        svg_sleep.append("rect")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("width", 80)
+                .attr("height", 22)
+                .attr("rx", 5)
+                .attr("transform", "translate(410,0)")
+                .attr("fill", function (d){
+                    if (sleepdata["data"][19]["value"] >= 7) {
+                        return "#88F5BA";
+                    } else if (sleepdata["data"][19]["value"] >= 4) {
+                        return "#F2DD20";
+                    } else {
+                        return "#EC6161";
+                    }
+                });
+
+        svg_sleep.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("transform", "translate(420,10)")
+                .attr("dy", ".35em")
+                .text(function (d) {
+                    return sleepdata["data"][19]["value"] + " / 10"
+                })
     </script>
 </body>
 </html>

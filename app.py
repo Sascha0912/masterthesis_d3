@@ -1,19 +1,13 @@
 import os
 from flask import Flask, render_template, url_for, json
 import numpy as np
-from stats import ttest, mixedmodel, linearregression
+from stats import ttest, mixedmodel, linearregression, avg_per_treatment
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def overview():
-    return render_template('overview.html')
-
-
-@app.route('/trends/<int:trendid>')
-def trends(trendid):
-    pain_json = ""
     SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 
     json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
@@ -26,13 +20,43 @@ def trends(trendid):
     stressdata = json.load(open(json_url3))
     sleepdata = json.load(open(json_url4))
 
-    print(paindata)
+    return render_template('overview.html',
+                           paindata=paindata,
+                           activitydata=activitydata,
+                           stressdata=stressdata,
+                           sleepdata=sleepdata)
+
+
+@app.route('/trends/<int:trendid>')
+def trends(trendid):
+    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+
+    json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
+    json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
+    json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
+    json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
+
+    paindata = json.load(open(json_url1))
+    activitydata = json.load(open(json_url2))
+    stressdata = json.load(open(json_url3))
+    sleepdata = json.load(open(json_url4))
+
+    # print(paindata)
+
+    pain_per_treatment = avg_per_treatment(paindata["data"])
+    activity_per_treatment = avg_per_treatment(activitydata["data"])
+    stress_per_treatment = avg_per_treatment(stressdata["data"])
+    sleep_per_treatment = avg_per_treatment(sleepdata["data"])
 
     return render_template('trends.html',
                            paindata=paindata,
                            activitydata=activitydata,
                            stressdata=stressdata,
                            sleepdata=sleepdata,
+                           pain_per_treatment=pain_per_treatment,
+                           activity_per_treatment=activity_per_treatment,
+                           stress_per_treatment=stress_per_treatment,
+                           sleep_per_treatment=sleep_per_treatment,
                            trendid=trendid)
 
 

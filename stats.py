@@ -36,9 +36,9 @@ def mixedmodel(dataset):
     model_b = LinearRegression(fit_intercept=True).fit(x_b, y_b)
     y_pred_b = model_b.predict([[20]])
 
-    print(df)
-    print(y_pred_a)
-    print(y_pred_b)
+    # print(df)
+    # print(y_pred_a)
+    # print(y_pred_b)
     # print(df_treatmentA)
     md = smf.mixedlm("value ~ id", df, groups=df["treatment"])
     mdf = md.fit(method=["powell", "lbfgs"])
@@ -63,3 +63,13 @@ def linearregression(dataset):
     # print(y_pred_2)
 
     return model.score(x, y), model.intercept_, model.coef_, y_pred_1[0], y_pred_2[0], y_pred_3[0]
+
+
+def avg_per_treatment(dataset):
+    dataset_string = json.dumps(dataset)
+    df = pd.read_json(dataset_string, orient="records")
+
+    df_A = df[df["treatment"] == "A"]
+    df_B = df[df["treatment"] == "B"]
+
+    return df_A["value"].mean(), df_B["value"].mean()

@@ -22,13 +22,17 @@
 <body>
     <img src="../static/backarrow.png" onclick="history.back()" style="margin-right: 30px">
     <h1 style="display: inline">Details View</h1>
-    <h2>Your Ø Level</h2>
-    <div style="display: inline-block; vertical-align: top;">
-        <span id="avg_level" style="font-size: 20px; font-weight: bold">LOW</span><img src="../static/info.png" style="margin-left: 100px; margin-top: 30px;" onclick="window.location='/info/'+'{{ trendid }}';" alt="">
+    <h2 style="color: #ADADAD; margin-left: 145px">Your Ø Level</h2>
+    <div style="display: inline-block; vertical-align: top; margin-left: 145px">
+        <span id="avg_level" style="font-size: 30px; font-weight: bold">LOW</span><img src="../static/info.png" style="margin-left: 100px; margin-top: 30px;" onclick="window.location='/info/'+'{{ trendid }}';" alt="">
     </div>
     <div>
         <svg id="linechart" width="500" height="400"></svg>
     </div>
+
+    <input type="checkbox" id="treatment_visibility" name="treatment_visibility" value="Treatment" checked>
+    <label for="treatment_visibility"> Treatment Visibility</label><br>
+
     <div style="background-color: #E7E7E7; width: 500px; height: auto; padding-top: 10px; padding-bottom: 10px;">
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
@@ -68,11 +72,6 @@
         let lmm_pred_a = parseFloat('{{ lmm_pred_a }}');
         let lmm_pred_b = parseFloat('{{ lmm_pred_b }}');
 
-        // console.log(pvalue)
-        // console.log(lin_pred_1)
-        // console.log(lmm_pred_a)
-        // console.log(lmm_pred_b)
-
         let svg = d3.select("#linechart"),
             margin = 200,
             width = svg.attr("width") - margin,
@@ -86,7 +85,7 @@
 
         svg.append('text')
            .attr('x', width/2 + 100)
-           .attr('y', 100)
+           .attr('y', 50)
            .attr('text-anchor', 'middle')
            .style('font-family', 'Arial')
            .style('font-size', 20)
@@ -261,36 +260,148 @@
         document.getElementById("mixedmodelres_b").innerText = lmm_pred_b.toFixed(2)
 
         avg_level = ""
+        level_color = ""
+
         if (trendid==1) {
             const sum_activity = Object.values(activitydata["data"]).reduce((acc, current) => acc + current.value, 0);
             const average_activity = sum_activity / Object.values(activitydata["data"]).length;
-            console.log(average_activity)
-            avg_level = ((average_activity > 6.6) ? "High" : (average_activity > 3.3) ? "Low" : "Very Low");
+            // console.log(average_activity)
+            avg_level = ((average_activity >= 7) ? "High" : (average_activity >= 4) ? "Low" : "Very Low");
+            level_color = ((average_activity >= 7) ? "#88F5BA" : (average_activity >= 4) ? "#F2DD20" : "#EC6161");
+            lin_pred_color = ((lin_pred_1.toFixed(2) >= 7) ? "#88F5BA" : (lin_pred_1.toFixed(2) >= 4) ? "#F2DD20" : "#EC6161");
+            lmm_pred_color_a = ((lmm_pred_a.toFixed(2) >= 7) ? "#88F5BA" : (lmm_pred_a.toFixed(2) >= 4) ? "#F2DD20" : "#EC6161");
+            lmm_pred_color_b = ((lmm_pred_b.toFixed(2) >= 7) ? "#88F5BA" : (lmm_pred_b.toFixed(2) >= 4) ? "#F2DD20" : "#EC6161");
+
         } else if(trendid==2) {
             const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
             const average_pain = sum_pain / Object.values(paindata["data"]).length;
-            console.log(average_pain)
-            avg_level = ((average_pain > 6.6) ? "High" : (average_pain > 3.3) ? "Low" : "Very Low");
+            // console.log(average_pain)
+            avg_level = ((average_pain >= 7) ? "High" : (average_pain >= 4) ? "Low" : "Very Low");
+            level_color = ((average_pain>= 7) ? "#EC6161" : (average_pain >= 4) ? "#F2DD20" : "#88F5BA");
+            lin_pred_color = ((lin_pred_1.toFixed(2) >= 7) ? "#EC6161" : (lin_pred_1.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
+            lmm_pred_color_a = ((lmm_pred_a.toFixed(2) >= 7) ? "#EC6161" : (lmm_pred_a.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
+            lmm_pred_color_b = ((lmm_pred_b.toFixed(2) >= 7) ? "#EC6161" : (lmm_pred_b.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
         } else if (trendid==3) {
             const sum_stress = Object.values(stressdata["data"]).reduce((acc, current) => acc + current.value, 0);
             const average_stress = sum_stress / Object.values(stressdata["data"]).length;
-            console.log(average_stress)
-            avg_level = ((average_stress > 6.6) ? "High" : (average_stress > 3.3) ? "Low" : "Very Low");
+            // console.log(average_stress)
+            avg_level = ((average_stress >= 7) ? "High" : (average_stress >= 4) ? "Low" : "Very Low");
+            level_color = ((average_stress>= 7) ? "#EC6161" : (average_stress >= 4) ? "#F2DD20" : "#88F5BA");
+            lin_pred_color = ((lin_pred_1.toFixed(2) >= 7) ? "#EC6161" : (lin_pred_1.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
+            lmm_pred_color_a = ((lmm_pred_a.toFixed(2) >= 7) ? "#EC6161" : (lmm_pred_a.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
+            lmm_pred_color_b = ((lmm_pred_b.toFixed(2) >= 7) ? "#EC6161" : (lmm_pred_b.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
         } else if (trendid==4) {
             const sum_sleep = Object.values(sleepdata["data"]).reduce((acc, current) => acc + current.value, 0);
             const average_sleep = sum_sleep / Object.values(sleepdata["data"]).length;
-            console.log(average_sleep)
-            avg_level = ((average_sleep > 6.6) ? "High" : (average_sleep > 3.3) ? "Low" : "Very Low");
+            // console.log(average_sleep)
+            avg_level = ((average_sleep >= 7) ? "High" : (average_sleep >= 4) ? "Low" : "Very Low");
+            level_color = ((average_sleep >= 7) ? "#88F5BA" : (average_sleep >= 4) ? "#F2DD20" : "#EC6161");
+            lin_pred_color = ((lin_pred_1.toFixed(2) >= 7) ? "#88F5BA" : (lin_pred_1.toFixed(2) >= 4) ? "#F2DD20" : "#EC6161");
+            lmm_pred_color_a = ((lmm_pred_a.toFixed(2) >= 7) ? "#88F5BA" : (lmm_pred_a.toFixed(2) >= 4) ? "#F2DD20" : "#EC6161");
+            lmm_pred_color_b = ((lmm_pred_b.toFixed(2) >= 7) ? "#88F5BA" : (lmm_pred_b.toFixed(2) >= 4) ? "#F2DD20" : "#EC6161");
         } else {
             const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
             const average_pain = sum_pain / Object.values(paindata["data"]).length;
-            console.log(average_pain)
-            avg_level = ((average_pain > 6.6) ? "High" : (average_pain > 3.3) ? "Low" : "Very Low");
+            // console.log(average_pain)
+            avg_level = ((average_pain >= 7) ? "High" : (average_pain >= 4) ? "Low" : "Very Low");
+            level_color = ((average_pain>= 7) ? "#EC6161" : (average_pain >= 4) ? "#F2DD20" : "#88F5BA");
+            lin_pred_color = ((lin_pred_1.toFixed(2) >= 7) ? "#EC6161" : (lin_pred_1.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
+            lmm_pred_color_a = ((lmm_pred_a.toFixed(2) >= 7) ? "#EC6161" : (lmm_pred_a.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
+            lmm_pred_color_b = ((lmm_pred_b.toFixed(2) >= 7) ? "#EC6161" : (lmm_pred_b.toFixed(2) >= 4) ? "#F2DD20" : "#88F5BA");
         }
 
         document.getElementById("avg_level").innerText = avg_level;
+        document.getElementById("avg_level").style.color = level_color;
+        document.getElementById("linmodelres").style.color = lin_pred_color;
+        document.getElementById("mixedmodelres_a").style.color = lmm_pred_color_a;
+        document.getElementById("mixedmodelres_b").style.color = lmm_pred_color_b;
 
+        // ****** TREATMENT (Lines) VISIBILITY
 
+        svg.append("line")
+            .style("stroke", "#E7E7E7")
+            .style("stroke-width", 2)
+            .attr("class", "treatment_line")
+            .attr("x1", 164)
+            .attr("y1", 100)
+            .attr("x2", 164)
+            .attr("y2", 300)
+
+        svg.append("line")
+            .style("stroke", "#E7E7E7")
+            .style("stroke-width", 2)
+            .attr("class", "treatment_line")
+            .attr("x1", 227)
+            .attr("y1", 100)
+            .attr("x2", 227)
+            .attr("y2", 300)
+
+        svg.append("line")
+            .style("stroke", "#E7E7E7")
+            .style("stroke-width", 2)
+            .attr("class", "treatment_line")
+            .attr("x1", 290)
+            .attr("y1", 100)
+            .attr("x2", 290)
+            .attr("y2", 300)
+
+        svg.append("line")
+            .style("stroke", "#E7E7E7")
+            .style("stroke-width", 2)
+            .attr("class", "treatment_line")
+            .attr("x1", 353)
+            .attr("y1", 100)
+            .attr("x2", 353)
+            .attr("y2", 300)
+
+        svg.append("text")
+            .attr("x", 105)
+            .attr("y", 100)
+            .attr("class", "treatment_text")
+            .style("font-size", "10px")
+            .style("color", "#E7E7E7")
+            .text("Baseline")
+
+        svg.append("text")
+            .attr("x", 168)
+            .attr("y", 100)
+            .attr("class", "treatment_text")
+            .style("font-size", "10px")
+            .style("color", "#E7E7E7")
+            .text("A")
+
+        svg.append("text")
+            .attr("x", 231)
+            .attr("y", 100)
+            .attr("class", "treatment_text")
+            .style("font-size", "10px")
+            .style("color", "#E7E7E7")
+            .text("B")
+
+        svg.append("text")
+            .attr("x", 294)
+            .attr("y", 100)
+            .attr("class", "treatment_text")
+            .style("font-size", "10px")
+            .style("color", "#E7E7E7")
+            .text("A")
+
+        svg.append("text")
+            .attr("x", 357)
+            .attr("y", 100)
+            .attr("class", "treatment_text")
+            .style("font-size", "10px")
+            .style("color", "#E7E7E7")
+            .text("B")
+
+        d3.selectAll("[name=treatment_visibility]").on("change", function(){
+            let treatment_visible = this.checked ? 1 : 0;
+            svg.selectAll(".treatment_line")
+                .style("opacity", treatment_visible)
+
+            svg.selectAll(".treatment_text")
+                .style("opacity", treatment_visible)
+        })
 
 
 
