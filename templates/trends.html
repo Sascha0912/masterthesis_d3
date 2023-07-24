@@ -28,6 +28,7 @@
             margin-left: 20px
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
@@ -666,17 +667,17 @@
             document.getElementById("title").innerText = "Your Back pain development";
         }
 
-        document.getElementById("pain_trend").textContent = "Treatment A average: " + pain_per_treatment.split(",")[0].substring(1)
-            + "   Treatment B average: " + pain_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("pain_trend").innerHTML = "<i class='fa-solid fa-tablets'></i> Treatment A average: " + pain_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + pain_per_treatment.split(",")[1].slice(0, -1);
 
-        document.getElementById("activity_trend").textContent = "Treatment A average: " + activity_per_treatment.split(",")[0].substring(1)
-            + "   Treatment B average: " + activity_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("activity_trend").innerHTML = "<i class='fa-solid fa-tablets'></i> Treatment A average: " + activity_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + activity_per_treatment.split(",")[1].slice(0, -1);
 
-        document.getElementById("stress_trend").textContent = "Treatment A average: " + stress_per_treatment.split(",")[0].substring(1)
-            + "   Treatment B average: " + stress_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("stress_trend").innerHTML = "<i class='fa-solid fa-tablets'></i> Treatment A average: " + stress_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + stress_per_treatment.split(",")[1].slice(0, -1);
 
-        document.getElementById("sleep_trend").textContent = "Treatment A average: " + sleep_per_treatment.split(",")[0].substring(1)
-            + "   Treatment B average: " + sleep_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("sleep_trend").innerHTML = " <i class='fa-solid fa-tablets'></i> Treatment A average: " + sleep_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + sleep_per_treatment.split(",")[1].slice(0, -1);
 
 
 

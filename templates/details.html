@@ -17,6 +17,7 @@
             border-radius: 20px;
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://d3js.org/d3.v4.min.js"></script>
 </head>
 <body>
@@ -30,8 +31,11 @@
         <svg id="linechart" width="500" height="400"></svg>
     </div>
 
-    <input type="checkbox" id="treatment_visibility" name="treatment_visibility" value="Treatment" checked>
-    <label for="treatment_visibility"> Treatment Visibility</label><br>
+    <input type="checkbox" id="treatment_visibility" name="treatment_visibility" value="Treatment" style="width: 20px; height: 20px" checked>
+    <label for="treatment_visibility" style="font-size: 20px"> Treatment Visibility</label><br>
+
+    <input type="checkbox" id="other_visibility" name="other_visibility" value="Other" style="width: 20px; height: 20px" checked>
+    <label for="other_visibility" style="font-size: 20px"> Other Visibility</label><br>
 
     <div style="background-color: #E7E7E7; width: 500px; height: auto; padding-top: 10px; padding-bottom: 10px;">
         <div class="box">
@@ -48,12 +52,14 @@
 
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
+            <p id="treatment_name_A" style="font-size: 20px; margin-left: 10px; padding-top: 10px"><i class="fa-solid fa-tablets"></i> Treatment A</p>
             <p id="mixedmodelres_a" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
             <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only treatment A is still performed</p>
         </div>
 
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
+            <p id="treatment_name_B" style="font-size: 20px; margin-left: 10px; padding-top: 10px"><i class="fa-solid fa-syringe"></i> Treatment B</p>
             <p id="mixedmodelres_b" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
             <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only treatment B is still performed</p>
         </div>
@@ -181,6 +187,7 @@
             .attr("cy", function (d) { return yScale(d.avg); })
             .attr("r", 2)
             .attr("transform", "translate(" + 100 + "," + 100 + ")")
+            .attr("class", "comparedots")
             .style("fill", "#ADADAD");
 
         let line = d3.line()
@@ -229,6 +236,7 @@
                  }
            })
            .attr("class", "line")
+           .attr("class", "compareline")
            .attr("transform", "translate(" + 100 + "," + 100 + ")")
            .attr("d", line_compare)
            .style("fill", "none")
@@ -401,6 +409,15 @@
 
             svg.selectAll(".treatment_text")
                 .style("opacity", treatment_visible)
+        })
+
+        d3.selectAll("[name=other_visibility]").on("change", function(){
+            let other_visible = this.checked ? 1 : 0;
+            svg.selectAll(".compareline")
+                .style("opacity", other_visible)
+
+            svg.selectAll(".comparedots")
+                .style("opacity", other_visible)
         })
 
 

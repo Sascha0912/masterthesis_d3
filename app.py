@@ -5,21 +5,21 @@ from stats import ttest, mixedmodel, linearregression, avg_per_treatment
 
 app = Flask(__name__)
 
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+
+json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
+json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
+json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
+json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
+
+paindata = json.load(open(json_url1))
+activitydata = json.load(open(json_url2))
+stressdata = json.load(open(json_url3))
+sleepdata = json.load(open(json_url4))
+
 
 @app.route('/')
 def overview():
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-
-    json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
-    json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
-    json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
-    json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
-
-    paindata = json.load(open(json_url1))
-    activitydata = json.load(open(json_url2))
-    stressdata = json.load(open(json_url3))
-    sleepdata = json.load(open(json_url4))
-
     return render_template('overview.html',
                            paindata=paindata,
                            activitydata=activitydata,
@@ -29,19 +29,17 @@ def overview():
 
 @app.route('/trends/<int:trendid>')
 def trends(trendid):
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-
-    json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
-    json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
-    json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
-    json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
-
-    paindata = json.load(open(json_url1))
-    activitydata = json.load(open(json_url2))
-    stressdata = json.load(open(json_url3))
-    sleepdata = json.load(open(json_url4))
-
-    # print(paindata)
+    # SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    #
+    # json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
+    # json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
+    # json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
+    # json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
+    #
+    # paindata = json.load(open(json_url1))
+    # activitydata = json.load(open(json_url2))
+    # stressdata = json.load(open(json_url3))
+    # sleepdata = json.load(open(json_url4))
 
     pain_per_treatment = avg_per_treatment(paindata["data"])
     activity_per_treatment = avg_per_treatment(activitydata["data"])
@@ -62,24 +60,24 @@ def trends(trendid):
 
 @app.route('/details/<int:trendid>')
 def details(trendid):
-    SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-
-    json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
-    json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
-    json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
-    json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
-
-    paindata = json.load(open(json_url1))
-    activitydata = json.load(open(json_url2))
-    stressdata = json.load(open(json_url3))
-    sleepdata = json.load(open(json_url4))
+    # SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+    #
+    # json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
+    # json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
+    # json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
+    # json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
+    #
+    # paindata = json.load(open(json_url1))
+    # activitydata = json.load(open(json_url2))
+    # stressdata = json.load(open(json_url3))
+    # sleepdata = json.load(open(json_url4))
 
     # print(activitydata)
 
-    my_data_arr = ""
-    avg_data_arr = ""
-    lmm_res = ""
-    lin_res = ""
+    # my_data_arr = ""
+    # avg_data_arr = ""
+    # lmm_res = ""
+    # lin_res = ""
     if trendid == 1:
         my_data_arr = [d["value"] for d in activitydata["data"]]
         avg_data_arr = [d["avg"] for d in activitydata["data"]]
@@ -123,6 +121,10 @@ def details(trendid):
 @app.route('/info/<int:trendid>')
 def info(trendid):
     return render_template('info.html',
+                           paindata=paindata,
+                           activitydata=activitydata,
+                           stressdata=stressdata,
+                           sleepdata=sleepdata,
                            trendid=trendid)
 
 

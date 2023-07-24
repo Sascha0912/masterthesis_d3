@@ -2,7 +2,8 @@
   "metadata": [
     {
       "name": "Quality of sleep",
-      "time unit": "week"
+      "time unit": "week",
+      "info": "Sleep quality refers to the set of characteristics and properties of sleep that affect a person's recovery, regeneration, and overall well-being. It describes how effective, restful and undisturbed a person's sleep is. Sleep quality encompasses several aspects, including duration of sleep, efficiency of sleep, deep sleep and REM sleep stages, sleep latency (time required to fall asleep), sleep disturbances, sleep architecture, and subjective perception of sleep. Duration of sleep refers to the total amount of time a person sleeps. It is recommended that adults typically get between 7 and 9 hours of sleep per night, although individual differences may exist. Sleep efficiency refers to the percentage of actual sleep time relative to total time spent in bed. High efficiency means that the person is actually sleeping a large portion of the time in bed and not lying awake or having restless sleep. Sleep architecture refers to the sequence and distribution of different sleep phases during the night. Sleep consists of recurring cycles of different sleep stages, including deep sleep (slow-wave sleep) and REM sleep (rapid eye movement sleep). Good quality sleep includes an adequate amount of deep sleep and REM sleep, as these stages are important for rest, learning, memory consolidation, and emotional regulation."
     }
   ],
   "data": [
