@@ -52,16 +52,16 @@
 
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
-            <p id="treatment_name_A" style="font-size: 20px; margin-left: 10px; padding-top: 10px"><i class="fa-solid fa-tablets"></i> Treatment A</p>
+            <p id="treatment_name_A" style="font-size: 20px; margin-left: 10px; padding-top: 10px; font-weight: bold"><i class="fa-solid fa-tablets"></i> Treatment A</p>
             <p id="mixedmodelres_a" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
-            <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only treatment A is still performed</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only this treatment is still performed</p>
         </div>
 
         <div class="box">
             <!--<p style="margin-left: 10px; padding-top: 10px">Statistics</p>-->
-            <p id="treatment_name_B" style="font-size: 20px; margin-left: 10px; padding-top: 10px"><i class="fa-solid fa-syringe"></i> Treatment B</p>
+            <p id="treatment_name_B" style="font-size: 20px; margin-left: 10px; padding-top: 10px; font-weight: bold"><i class="fa-solid fa-syringe"></i> Treatment B</p>
             <p id="mixedmodelres_b" style="font-weight: bold; font-size: 30px; margin-left: 10px; padding-top: 10px">-</p>
-            <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only treatment B is still performed</p>
+            <p style="margin-left: 10px; padding-bottom: 10px">predicted value when only this treatment is still performed</p>
         </div>
     </div>
 
@@ -324,6 +324,9 @@
         document.getElementById("mixedmodelres_a").style.color = lmm_pred_color_a;
         document.getElementById("mixedmodelres_b").style.color = lmm_pred_color_b;
 
+        document.getElementById("treatment_name_A").innerHTML = "<i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment1_name"]
+        document.getElementById("treatment_name_B").innerHTML = "<i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment2_name"]
+
         // ****** TREATMENT (Lines) VISIBILITY
 
         svg.append("line")
@@ -376,7 +379,7 @@
             .attr("class", "treatment_text")
             .style("font-size", "10px")
             .style("color", "#E7E7E7")
-            .text("A")
+            .text(paindata["metadata"][0]["treatment1_name"])
 
         svg.append("text")
             .attr("x", 231)
@@ -384,7 +387,7 @@
             .attr("class", "treatment_text")
             .style("font-size", "10px")
             .style("color", "#E7E7E7")
-            .text("B")
+            .text(paindata["metadata"][0]["treatment2_name"])
 
         svg.append("text")
             .attr("x", 294)
@@ -392,7 +395,7 @@
             .attr("class", "treatment_text")
             .style("font-size", "10px")
             .style("color", "#E7E7E7")
-            .text("A")
+            .text(paindata["metadata"][0]["treatment1_name"])
 
         svg.append("text")
             .attr("x", 357)
@@ -400,7 +403,7 @@
             .attr("class", "treatment_text")
             .style("font-size", "10px")
             .style("color", "#E7E7E7")
-            .text("B")
+            .text(paindata["metadata"][0]["treatment2_name"])
 
         d3.selectAll("[name=treatment_visibility]").on("change", function(){
             let treatment_visible = this.checked ? 1 : 0;

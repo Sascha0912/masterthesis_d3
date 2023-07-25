@@ -16,7 +16,7 @@
         }
         #other_container {
             background-color: #E7E7E7;
-            width: 700px;
+            width: 600px;
             height: 1100px;
         }
         .trendbox {
@@ -335,28 +335,28 @@
                                              .attr("x", xScale_other_pain(0)+140)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let backpain_text_b1 = svg_other_pain.append("text")
                                              .attr("y", yScale_other_pain(0)+10)
                                              .attr("x", xScale_other_pain(0)+236)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         let backpain_text_a2 = svg_other_pain.append("text")
                                              .attr("y", yScale_other_pain(0)+10)
                                              .attr("x", xScale_other_pain(0)+332)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let backpain_text_b2 = svg_other_pain.append("text")
                                              .attr("y", yScale_other_pain(0)+10)
                                              .attr("x", xScale_other_pain(0)+428)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         svg_other_pain.append("line")
            .attr("x1", 100)
@@ -426,28 +426,28 @@
                                              .attr("x", xScale_other_activity(0)+140)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let activity_text_b1 = svg_other_activity.append("text")
                                              .attr("y", yScale_other_activity(0)+10)
                                              .attr("x", xScale_other_activity(0)+236)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         let activity_text_a2 = svg_other_activity.append("text")
                                              .attr("y", yScale_other_activity(0)+10)
                                              .attr("x", xScale_other_activity(0)+332)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let activity_text_b2 = svg_other_activity.append("text")
                                              .attr("y", yScale_other_activity(0)+10)
                                              .attr("x", xScale_other_activity(0)+428)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         svg_other_activity.append("line")
            .attr("x1", 100)
@@ -517,28 +517,28 @@
                                              .attr("x", xScale_other_stress(0)+140)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let stress_text_b1 = svg_other_stress.append("text")
                                              .attr("y", yScale_other_stress(0)+10)
                                              .attr("x", xScale_other_stress(0)+236)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         let stress_text_a2 = svg_other_stress.append("text")
                                              .attr("y", yScale_other_stress(0)+10)
                                              .attr("x", xScale_other_stress(0)+332)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let stress_text_b2 = svg_other_stress.append("text")
                                              .attr("y", yScale_other_stress(0)+10)
                                              .attr("x", xScale_other_stress(0)+428)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         svg_other_stress.append("line")
            .attr("x1", 100)
@@ -608,28 +608,28 @@
                                              .attr("x", xScale_other_sleep(0)+140)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let sleep_text_b1 = svg_other_sleep.append("text")
                                              .attr("y", yScale_other_sleep(0)+10)
                                              .attr("x", xScale_other_sleep(0)+236)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         let sleep_text_a2 = svg_other_sleep.append("text")
                                              .attr("y", yScale_other_sleep(0)+10)
                                              .attr("x", xScale_other_sleep(0)+332)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment A")
+                                             .text(paindata["metadata"][0]["treatment1_name"])
 
         let sleep_text_b2 = svg_other_sleep.append("text")
                                              .attr("y", yScale_other_sleep(0)+10)
                                              .attr("x", xScale_other_sleep(0)+428)
                                              .attr("text-anchor", "middle")
                                              .attr("class", "label")
-                                             .text("Treatment B")
+                                             .text(paindata["metadata"][0]["treatment2_name"])
 
         svg_other_sleep.append("line")
            .attr("x1", 100)
@@ -667,17 +667,17 @@
             document.getElementById("title").innerText = "Your Back pain development";
         }
 
-        document.getElementById("pain_trend").innerHTML = "<i class='fa-solid fa-tablets'></i> Treatment A average: " + pain_per_treatment.split(",")[0].substring(1)
-            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + pain_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("pain_trend").innerHTML = "<i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment1_name"] + " average: " + pain_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment2_name"] + " average: " + pain_per_treatment.split(",")[1].slice(0, -1);
 
-        document.getElementById("activity_trend").innerHTML = "<i class='fa-solid fa-tablets'></i> Treatment A average: " + activity_per_treatment.split(",")[0].substring(1)
-            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + activity_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("activity_trend").innerHTML = "<i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment1_name"] + " average: " + activity_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment2_name"] + " average: " + activity_per_treatment.split(",")[1].slice(0, -1);
 
-        document.getElementById("stress_trend").innerHTML = "<i class='fa-solid fa-tablets'></i> Treatment A average: " + stress_per_treatment.split(",")[0].substring(1)
-            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + stress_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("stress_trend").innerHTML = "<i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment1_name"] + " average: " + stress_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment2_name"] + " average: " + stress_per_treatment.split(",")[1].slice(0, -1);
 
-        document.getElementById("sleep_trend").innerHTML = " <i class='fa-solid fa-tablets'></i> Treatment A average: " + sleep_per_treatment.split(",")[0].substring(1)
-            + "   <i class='fa-solid fa-syringe'></i> Treatment B average: " + sleep_per_treatment.split(",")[1].slice(0, -1);
+        document.getElementById("sleep_trend").innerHTML = " <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment1_name"] + " average: " + sleep_per_treatment.split(",")[0].substring(1)
+            + "   <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment2_name"] + " average: " + sleep_per_treatment.split(",")[1].slice(0, -1);
 
 
 
