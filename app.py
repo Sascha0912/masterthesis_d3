@@ -1,6 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, json
-import numpy as np
+from flask import Flask, render_template, json
 from stats import ttest, mixedmodel, linearregression, avg_per_treatment
 
 app = Flask(__name__)
@@ -29,18 +28,6 @@ def overview():
 
 @app.route('/trends/<int:trendid>')
 def trends(trendid):
-    # SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    #
-    # json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
-    # json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
-    # json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
-    # json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
-    #
-    # paindata = json.load(open(json_url1))
-    # activitydata = json.load(open(json_url2))
-    # stressdata = json.load(open(json_url3))
-    # sleepdata = json.load(open(json_url4))
-
     pain_per_treatment = avg_per_treatment(paindata["data"])
     activity_per_treatment = avg_per_treatment(activitydata["data"])
     stress_per_treatment = avg_per_treatment(stressdata["data"])
@@ -60,24 +47,6 @@ def trends(trendid):
 
 @app.route('/details/<int:trendid>')
 def details(trendid):
-    # SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
-    #
-    # json_url1 = os.path.join(SITE_ROOT, "static/data", "pain_data.json")
-    # json_url2 = os.path.join(SITE_ROOT, "static/data", "activity_data.json")
-    # json_url3 = os.path.join(SITE_ROOT, "static/data", "stress_data.json")
-    # json_url4 = os.path.join(SITE_ROOT, "static/data", "sleep_data.json")
-    #
-    # paindata = json.load(open(json_url1))
-    # activitydata = json.load(open(json_url2))
-    # stressdata = json.load(open(json_url3))
-    # sleepdata = json.load(open(json_url4))
-
-    # print(activitydata)
-
-    # my_data_arr = ""
-    # avg_data_arr = ""
-    # lmm_res = ""
-    # lin_res = ""
     if trendid == 1:
         my_data_arr = [d["value"] for d in activitydata["data"]]
         avg_data_arr = [d["avg"] for d in activitydata["data"]]

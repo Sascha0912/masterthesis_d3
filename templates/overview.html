@@ -48,37 +48,15 @@
             <img src="../static/arrow.png" style="margin-left: 320px; margin-top: 15px; height: 30px" alt="">
         </div>
 
-
-
         <div style="display: inline-block">
             <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
                 <span id="level_pain_text" style="color: #88F5BA;">Less</span> pain
             </div>
-            <!--
-            <div style="display: inline; height: 30px; width: 80px; background-color: #88F5BA; margin-left: 260px; color: #26E82D; stroke: #007805; border-radius: 5px">
-                <img src="../static/greendot.png" style="height: 14px; margin-right: 10px;margin-left: 5px">8.2 / 10
-            </div>-->
             <div style="display: block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
                 since last measurement
             </div>
             <svg id="pain_level" style="display: inline" width="500"></svg>
-
-
-
-            <!--
-            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 281px; color: #26E82D; stroke: #007805; border-radius: 5px">
-                <span style="visibility: hidden">8.2 / 10-----</span>
-            </div>
-            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
-                <span style="visibility: hidden">than last week</span>
-            </div>
-            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 281px; color: #26E82D; stroke: #007805; border-radius: 5px">
-                <span style="visibility: hidden">8.2 / 10-----</span>
-            </div>-->
         </div>
-
-
-
     </div>
 
     <div class="box" style="height: 140px; width: 500px" onclick="window.location='/trends/3';">
@@ -95,25 +73,11 @@
             <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
                 <span id="level_stress_text" style="color: #F2DD20;">Medium</span> stress level
             </div>
-            <!--
-            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 120px; color: #26E82D; stroke: #007805; border-radius: 5px">
-                <span style="visibility: hidden">5.1 / 10-----</span>
-            </div>-->
             <div style="display: block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
                 at last acquisition
             </div>
 
             <svg id="stress_level" style="display: inline" width="500"></svg>
-            <!--
-            <div style="display: inline; height: 30px; width: 80px; background-color: #F2DD20; margin-left: 306px; color: #FFC700; stroke: #007805; border-radius: 5px">
-                <img src="../static/yellowdot.png" style="height: 14px; margin-right: 10px;margin-left: 5px"><span>5.1 / 10</span>
-            </div>
-            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
-                <span style="visibility: hidden">last week</span>
-            </div>
-            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 306px; color: #26E82D; stroke: #007805; border-radius: 5px">
-                <span style="visibility: hidden">5.1 / 10-----</span>
-            </div>-->
         </div>
     </div>
 
@@ -131,24 +95,10 @@
             <div style="display: inline-block; font-weight: bold; font-size: 20pt; margin-left: 20px">
                 <span id="level_sleep_text" style="color: #EC6161;">Poor</span> quality of sleep
             </div>
-            <!--
-            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 120px; color: #26E82D; stroke: #007805; border-radius: 5px">
-                <span style="visibility: hidden">3.2 / 10-----</span>
-            </div>-->
             <div style="display: block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
                 at last acquisition
             </div>
             <svg id="sleep_level" style="display: inline" width="500"></svg>
-            <!--
-            <div style="display: inline; height: 30px; width: 80px; background-color: #E7E7E7; margin-left: 315px; color: #FFC700; stroke: #007805; border-radius: 5px">
-                <span style="visibility: hidden">3.2 / 10-----</span>
-            </div>
-            <div style="display: inline-block; font-weight: normal; color: #B4B4B4; margin-left: 20px">
-                <span style="visibility: hidden">last week</span>
-            </div>
-            <div style="display: inline; height: 30px; width: 80px; background-color: #EC6161; margin-left: 315px; color: #DA1B1B; stroke: #007805; border-radius: 5px">
-                <img src="../static/reddot.png" style="height: 14px; margin-right: 10px;margin-left: 5px"><span>3.2 / 10</span>
-            </div>-->
         </div>
     </div>
     <script>
@@ -161,7 +111,6 @@
             return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
         }
 
-        // console.log(activitydata)
         let svg = d3.select("#activity_slider")
 
         svg.append("rect")
@@ -214,7 +163,6 @@
             document.getElementById("level_stress_text").innerText = "Low";
             document.getElementById("level_stress_text").style.color = "#88F5BA";
         }
-
 
         if (sleepdata["data"][19]["value"] >= 7) {
             document.getElementById("level_sleep_text").innerText = "High";

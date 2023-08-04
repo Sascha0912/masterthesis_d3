@@ -18,7 +18,6 @@
 <body>
     <div style="background-color: white; width: 500px; border-radius: 10px;">
         <img src="../static/backarrow.png" onclick="history.back()" style="margin-right: 30px">
-{#        <h1 style="display: inline">Info</h1>#}
         <div style="background-color: white; width: 500px; height: auto">
             <img class="infoimg" src="../static/info.png"><br/>
             <div id="infocontent">
@@ -31,8 +30,6 @@
                 let sleepdata =    JSON.parse('{{ sleepdata | tojson | safe }}')
                 let trendid = '{{ trendid }}';
 
-                // let infotext = "";
-                // console.log(activitydata["metadata"][0]["info"])
                 if (trendid==1) {
                     infotext = activitydata["metadata"][0]["info"]
                 } else if (trendid==2) {
@@ -47,7 +44,6 @@
 
                 document.getElementById("infocontent").innerText = infotext;
             </script>
-
         </div>
     </div>
 </body>

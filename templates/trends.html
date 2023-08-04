@@ -115,9 +115,6 @@
         let stress_per_treatment = '{{ stress_per_treatment }}';
         let sleep_per_treatment = '{{ sleep_per_treatment }}';
 
-        // console.log(pain_per_treatment);
-
-
         const sum_pain = Object.values(paindata["data"]).reduce((acc, current) => acc + current.value, 0);
         const average_pain = sum_pain / Object.values(paindata["data"]).length;
 
@@ -142,7 +139,6 @@
            .attr("x", 50)
            .attr("y", 50)
            .attr("font-size", "24px")
-           //.text("pain value (0 - 10)")
 
         let xScale = d3.scaleBand().range([0, width]).padding(0.4),
             yScale = d3.scaleLinear().range([height, 0]);
@@ -220,10 +216,9 @@
              .attr("y", function(d) { return yScale(d.value); })
              .attr("width", xScale.bandwidth())
              .attr("height", function(d) {
-                 // console.log(height - yScale(d.value));
                  return height - yScale(d.value);
              });
-        //});
+
         svg.append("line")
            .attr("x1", xScale(0) + 100)
            .attr("x2", xScale(19) + 110)
@@ -277,10 +272,8 @@
                               .attr("class", "label")
                               .text(function(d) {
                                   if (trendid==1) {
-                                      //console.log("Ø " + average_activity.toFixed(2))
                                       return "Ø " + average_activity.toFixed(2)
                                   } else if (trendid==2) {
-                                      //console.log("Ø " + average_pain.toFixed(2))
                                       return "Ø " + average_pain.toFixed(2)
                                   } else if (trendid==3) {
                                       return "Ø "+ average_stress.toFixed(2)
@@ -678,9 +671,6 @@
 
         document.getElementById("sleep_trend").innerHTML = " <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment1_name"] + " average: " + sleep_per_treatment.split(",")[0].substring(1)
             + "   <i class='fa-solid fa-stethoscope'></i> " + paindata["metadata"][0]["treatment2_name"] + " average: " + sleep_per_treatment.split(",")[1].slice(0, -1);
-
-
-
     </script>
 </body>
 </html>

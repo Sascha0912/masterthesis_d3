@@ -12,7 +12,11 @@ The data needs to be prepared in the following way:
 {
   "metadata": [
     "name": <String>,
-    "time unit": <String>
+    "time unit": <String>,
+    "info": <String>,
+    "treatment1_name": <String>,
+    "treatment2_name": <String>
+    
   ],
   "data": [
     {
